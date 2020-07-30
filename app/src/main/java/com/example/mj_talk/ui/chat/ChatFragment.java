@@ -13,7 +13,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.mj_talk.R;
-import com.example.mj_talk.ui.dashboard.DashboardViewModel;
 
 public class ChatFragment extends Fragment {
 
