@@ -19,7 +19,7 @@ public class LoadingActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(LoadingActivity.this,MainActivity.class));
+                startActivity(new Intent(LoadingActivity.this, LoginActivity.class));
                 finish();
             }
         }, 2000); // 2초간 출력
