@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MJ_talk</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_dashboard">Board</string>
+    <string name="title_notifications">Profile</string>
     <string name="title_chat">Chat</string>
 </resources>
