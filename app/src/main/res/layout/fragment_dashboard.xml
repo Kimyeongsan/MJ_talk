@@ -11,12 +11,7 @@
         android:layout_height="50dp"
         android:background="#2b64ba">
 
-        <ImageButton
-            android:id="@+id/comback_home"
-            android:background="@drawable/ic_home"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="left" />
+
 
         <TextView
             android:id="@+id/titleTextView"
