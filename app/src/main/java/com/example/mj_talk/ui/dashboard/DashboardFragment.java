@@ -40,9 +40,9 @@ public class DashboardFragment extends Fragment {
         mRecyclerView = root.findViewById(R.id.boardlist);
 
         ArrayList<board_info> boardinfoArrayList = new ArrayList<>();
-        boardinfoArrayList.add(new board_info("공모전", "우대전공", "인원제한","글쓴이"));
-        boardinfoArrayList.add(new board_info("공모전1", "우대전공1", "인원제한1","글쓴이1"));
-        boardinfoArrayList.add(new board_info("공모전2", "우대전공2", "인원제한2","글쓴이2"));
+        boardinfoArrayList.add(new board_info("공모전", "우대전공", "인원제한", "글쓴이"));
+        boardinfoArrayList.add(new board_info("공모전1", "우대전공1", "인원제한1", "글쓴이1"));
+        boardinfoArrayList.add(new board_info("공모전2", "우대전공2", "인원제한2", "글쓴이2"));
         //여기서 값 수정
 
         mRecyclerView.setHasFixedSize(true);
@@ -51,26 +51,8 @@ public class DashboardFragment extends Fragment {
         myAdapter = new board_Adapter(boardinfoArrayList);
         mRecyclerView.setAdapter(myAdapter);
 
-        initialize();
 
         return root;
     }
-
-    private void initialize() {
-        ImageButton comback_home;
-
-        comback_home = root.findViewById(R.id.comback_home);
-
-        comback_home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public  void onClick(View v) {
-                Intent intent = new Intent(getContext(), MainActivity.class);  // 여기에는 연결되는 클래스가 들어가야지
-
-                startActivity(intent);
-            }
-
-        });
-    }
-
-
 }
+

@@ -11,8 +11,6 @@
         android:layout_height="50dp"
         android:background="#2b64ba">
 
-
-
         <TextView
             android:id="@+id/titleTextView"
             android:layout_width="wrap_content"

@@ -60,7 +60,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         //로그인 버튼
-
         Button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
