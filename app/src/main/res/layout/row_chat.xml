@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+        <ImageButton
+            android:id="@+id/profile_button"
+            android:background="@drawable/ic_home"
+            android:layout_height="80dp"
+            android:layout_width="80dp"
+            />
+
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:layout_marginTop="30sp"
+            android:layout_marginLeft="10dp"
+            android:textSize="20dp"
+            android:textColor="#000000"
+            android:text="권지용교수님" />
+
+
+
+
+
+</LinearLayout>
