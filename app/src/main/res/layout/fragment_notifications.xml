@@ -9,22 +9,23 @@
 
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="50dp"
     android:background="#3057B9"
     android:orientation="horizontal"
     >
 
-    <ImageButton
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@drawable/ic_home"
-        android:gravity="center"
-        ></ImageButton>
+
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:background="#2b64ba"
+    android:text="MJ TALK"
+    android:textColor="#ffffff"
+    android:textSize="20sp"
+    android:textStyle="bold"
+        android:gravity="center"/>
         />
+
 </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,7 +41,6 @@
             android:paddingRight="220dp"
             android:text="알림"
             android:textSize="25sp" />
-
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -55,12 +55,13 @@
         android:gravity="center"
         />
 
-    <RadioButton
-        android:id="@+id/rbtn1"
-        android:layout_width="60dp"
-        android:layout_height="60dp">
+    <com.ebanx.swipebtn.SwipeButton
+        android:id="@+id/swbtn1"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:gravity="center">
 
-    </RadioButton>
+    </com.ebanx.swipebtn.SwipeButton>
 </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -74,11 +75,13 @@
             android:text="수업 5분전 알림"
             android:gravity="center"
         />
-        <RadioButton
-            android:id="@+id/rbtn2"
-            android:layout_width="60dp"
-            android:layout_height="60dp">
-        </RadioButton>
+        <com.ebanx.swipebtn.SwipeButton
+            android:id="@+id/swbtn2"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center">
+
+        </com.ebanx.swipebtn.SwipeButton>
     </LinearLayout>
 
     <LinearLayout
@@ -93,11 +96,13 @@
         android:text="수업 10분전 알림"
         android:gravity="center"
         />
-    <RadioButton
-        android:id="@+id/rbtn3"
-        android:layout_width="60dp"
-        android:layout_height="60dp">
-        </RadioButton>
+        <com.ebanx.swipebtn.SwipeButton
+            android:id="@+id/swbtn3"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center">
+
+        </com.ebanx.swipebtn.SwipeButton>
 
 </LinearLayout>
     <LinearLayout
@@ -107,16 +112,18 @@
         <TextView
             android:layout_width="340dp"
             android:layout_height="60dp"
-            android:paddingRight="90dp"
-            android:textSize="20sp"
-            android:text="게시판 알림"
             android:gravity="center"
-            />
-        <RadioButton
-            android:id="@+id/rbtn4"
-            android:layout_width="60dp"
-            android:layout_height="60dp">
-        </RadioButton>
+            android:paddingRight="90dp"
+            android:text="게시판 알림"
+            android:textSize="20sp" />
+
+        <com.ebanx.swipebtn.SwipeButton
+            android:id="@+id/swbtn4"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center">
+
+        </com.ebanx.swipebtn.SwipeButton>
 
     </LinearLayout>
 
@@ -134,12 +141,14 @@
             android:text="수강과목 공개상태"
             android:gravity="center"
             />
-        <RadioButton
-            android:id="@+id/rbtn5"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:paddingBottom="16dp">
-        </RadioButton>
+        <com.ebanx.swipebtn.SwipeButton
+            android:id="@+id/swbtn5"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center">
+
+        </com.ebanx.swipebtn.SwipeButton>
+
 
     </LinearLayout>
     <LinearLayout
@@ -168,14 +177,14 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="67dp"
+            android:layout_height="88dp"
             android:background="#ffffff"
             >
 
         </TextView>
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:background="#3057B9"
             >
 
