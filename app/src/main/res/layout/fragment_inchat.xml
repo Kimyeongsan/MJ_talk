@@ -7,16 +7,19 @@
     tools:context=".ui.home.HomeFragment">
 
     <FrameLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#2b64ba">
-        <ImageView
-            android:id="@+id/back_button"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="15dp"
-            android:layout_gravity="left"
-            android:src="@drawable/ic_arrow" />
+
+<!--        <ImageView-->
+<!--            android:id="@+id/back_button"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_marginLeft="15dp"-->
+<!--            android:layout_gravity="left"-->
+<!--            android:src="@drawable/ic_arrow"-->
+<!--            android:background="null"-->
+<!--            />-->
 
         <TextView
             android:id="@+id/titleTextView"

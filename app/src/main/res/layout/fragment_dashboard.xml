@@ -6,6 +6,7 @@
     android:orientation="vertical"
     tools:context=".ui.home.HomeFragment">
 
+
     <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="50dp"
