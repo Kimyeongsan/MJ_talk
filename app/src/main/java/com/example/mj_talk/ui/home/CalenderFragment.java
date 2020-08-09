@@ -7,50 +7,46 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
 
-public class CalenderActivity extends Activity {
-    /**
-     * 연/월 텍스트뷰
-     */
-    private TextView tvDate;
-    /**
-     * 그리드뷰 어댑터
-     */
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
+import com.example.mj_talk.R;
+
+public class CalenderFragment extends Fragment {
+
+    private TextView tvMonth;
     private GridAdapter gridAdapter;
-
-    /**
-     * 일 저장 할 리스트
-     */
     private ArrayList<String> dayList;
-
-    /**
-     * 그리드뷰
-     */
     private GridView gridView;
+    private View root;
 
-    /**
-     * 캘린더 변수
-     */
+
     private Calendar mCal;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
 
-        setContentView(R.layout.activity_calendar);
+    @Override
+    public View onCreateView(
+            @NonNull LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
 
-        tvDate = (TextView)findViewById(R.id.tv_date);
-        gridView = (GridView)findViewById(R.id.gridview);
+        root = inflater.inflate(R.layout.activity_calendar, container, false);
+
+
+//        tvMonth = root.findViewById(R.id.tv_month);
+        gridView = root.findViewById(R.id.gridView);
 
         // 오늘에 날짜를 세팅 해준다.
         long now = System.currentTimeMillis();
@@ -61,7 +57,7 @@ public class CalenderActivity extends Activity {
         final SimpleDateFormat curDayFormat = new SimpleDateFormat("dd", Locale.KOREA);
 
         //현재 날짜 텍스트뷰에 뿌려줌
-        tvDate.setText(curYearFormat.format(date) + "/" + curMonthFormat.format(date));
+//        tvDate.setText(curYearFormat.format(date) + "/" + curMonthFormat.format(date));
 
         //gridview 요일 표시
         dayList = new ArrayList<String>();
@@ -84,9 +80,10 @@ public class CalenderActivity extends Activity {
         }
         setCalendarDate(mCal.get(Calendar.MONTH) + 1);
 
-        gridAdapter = new GridAdapter(getApplicationContext(), dayList);
+        gridAdapter = new GridAdapter(root.getContext(), dayList);
         gridView.setAdapter(gridAdapter);
 
+        return root;
     }
 
     /**
@@ -101,7 +98,7 @@ public class CalenderActivity extends Activity {
             dayList.add("" + (i + 1));
         }
 
-    }
+    };
 
     /**
      * 그리드뷰 어댑터
@@ -145,7 +142,7 @@ public class CalenderActivity extends Activity {
             ViewHolder holder = null;
 
             if (convertView == null) {
-                convertView = inflater.inflate(R.layout.item_calendar_gridview, parent, false);
+                convertView = inflater.inflate(R.layout.item_calendar, parent, false);
                 holder = new ViewHolder();
 
                 holder.tvItemGridView = (TextView)convertView.findViewById(R.id.tv_item_gridview);
@@ -162,7 +159,7 @@ public class CalenderActivity extends Activity {
             Integer today = mCal.get(Calendar.DAY_OF_MONTH);
             String sToday = String.valueOf(today);
             if (sToday.equals(getItem(position))) { //오늘 day 텍스트 컬러 변경
-                holder.tvItemGridView.setTextColor(getResources().getColor(R.color.color_000000));
+                holder.tvItemGridView.setTextColor(getResources().getColor(0000000));
             }
             return convertView;
         }
