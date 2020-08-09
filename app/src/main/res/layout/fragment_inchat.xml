@@ -16,9 +16,7 @@
             android:layout_height="50dp"
             android:layout_marginLeft="15dp"
             android:layout_gravity="left"
-            android:src="@drawable/ic_arrow"
-            android:background="null"
-            />
+            android:src="@drawable/ic_arrow" />
 
         <TextView
             android:id="@+id/titleTextView"

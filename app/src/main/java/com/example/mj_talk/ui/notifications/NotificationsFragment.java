@@ -44,12 +44,12 @@ public class NotificationsFragment extends Fragment {
 
 
         Button btn=root.findViewById(R.id.password);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.TextInputEditText_id1);
-        }
-        });
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Navigation.findNavController(view).navigate(R.id.TextInputEditText_id1);
+//        }
+//        });
         return root;
     }
 }
