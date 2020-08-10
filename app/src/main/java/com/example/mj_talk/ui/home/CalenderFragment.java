@@ -159,7 +159,7 @@ public class CalenderFragment extends Fragment {
             Integer today = mCal.get(Calendar.DAY_OF_MONTH);
             String sToday = String.valueOf(today);
             if (sToday.equals(getItem(position))) { //오늘 day 텍스트 컬러 변경
-                holder.tvItemGridView.setTextColor(getResources().getColor(0000000));
+                holder.tvItemGridView.setTextColor(getResources().getColor(R.color.colorPrimary));
             }
             return convertView;
         }
