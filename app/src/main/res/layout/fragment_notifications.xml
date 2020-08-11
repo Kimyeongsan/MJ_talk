@@ -146,8 +146,6 @@
                 android:layout_height="40dp">
 
             </com.ebanx.swipebtn.SwipeButton>
-
-
         </LinearLayout>
 
         <LinearLayout
@@ -167,6 +165,8 @@
                 android:textSize="20dp"></Button>
 
             <Button
+                android:clickable="true"
+                android:id="@+id/button_logout"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:paddingRight="195dp"

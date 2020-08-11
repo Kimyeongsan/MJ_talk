@@ -1,4 +1,4 @@
-package com.example.mj_talk;
+package com.example.mj_talk.ui.Login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.mj_talk.R;
 
 public class LoginFind extends AppCompatActivity {
     private Button Button_find_id;
