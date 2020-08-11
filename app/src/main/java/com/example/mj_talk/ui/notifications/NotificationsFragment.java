@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import com.ebanx.swipebtn.SwipeButton;
+import com.example.mj_talk.LoginAccount;
 import com.example.mj_talk.LoginActivity;
 import com.example.mj_talk.MainActivity;
 import com.example.mj_talk.R;
@@ -47,7 +48,8 @@ public class NotificationsFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.TextInputEditText_id1);
+              //  Intent intent = new Intent(NotificationsFragment.this,NotificationsViewModel.class);
+               // Navigation.findNavController(view).navigate(R.id.TextInputEditText_id1);
         }
         });
         return root;
