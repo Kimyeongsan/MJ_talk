@@ -136,32 +136,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-//    private void loginUser(String id, String password){
-//        mAuth.signInWithEmailAndPassword(id, password)
-//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if (task.isSuccessful()) {
-//                            // Sign in success, update UI with the signed-in user's information
-//                            //Log.d(TAG, "signInWithEmail:success");
-//                            FirebaseUser user = mAuth.getCurrentUser();
-//                            Toast.makeText(LoginActivity.this, "로그인 성공",
-//                                    Toast.LENGTH_SHORT).show();
-//                            //updateUI(user);
-//                        } else {
-//                            // If sign in fails, display a message to the user.
-//                            //Log.w(TAG, "signInWithEmail:failure", task.getException());
-//                            Toast.makeText(LoginActivity.this, "로그인 실패",
-//                                    Toast.LENGTH_SHORT).show();
-//                            //updateUI(null);
-//                            // ...
-//                        }
-//
-//                        // ...
-//                    }
-//                });
-//    }
-
 
     public void loginUser(String id, String password) {
         mAuth.signInWithEmailAndPassword(id, password)

@@ -42,7 +42,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:hint="id"
+                android:hint="email"
                 android:id="@+id/TextInputEditText_id">
 
             </com.google.android.material.textfield.TextInputEditText>
