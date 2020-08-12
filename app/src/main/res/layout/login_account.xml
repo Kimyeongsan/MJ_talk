@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="id"
-                android:id="@+id/TextInputEditText_id">
+                android:id="@+id/TextInputEditText_account_id">
 
             </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
@@ -72,7 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="password"
-                android:id="@+id/TextInputEditText_password1">
+                android:id="@+id/TextInputEditText_account_password">
 
             </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
@@ -87,26 +87,7 @@
         android:paddingLeft="70dp"
         android:paddingRight="70dp">
 
-        <TextView
-            android:text="PW"
-            android:textSize="20dp"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_gravity="center"
-            android:layout_weight="1" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:hint="password"
-                android:id="@+id/TextInputEditText_password2">
-
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
 

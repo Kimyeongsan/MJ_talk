@@ -202,7 +202,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:hint="ID"
+                        android:hint="email"
                         android:textColorHint="#CC3D3D"
                         android:id="@+id/TextInputEditText_id">
 

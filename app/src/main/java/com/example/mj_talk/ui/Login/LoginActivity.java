@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private LoginAccount login_account;
     private Button Button_login;
     private TextView Text_account;
     private TextView Text_forget;
@@ -83,8 +84,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (!TextInputEditText_id.getText().toString().equals("") && !TextInputEditText_password.getText().toString().equals("")) {
-                    //loginUser(TextInputEditText_id.getText().toString(), TextInputEditText_password.getText().toString());
-                    createUser(TextInputEditText_id.getText().toString(), TextInputEditText_password.getText().toString());
+                    loginUser(TextInputEditText_id.getText().toString(), TextInputEditText_password.getText().toString());
+                    //login_account.createUser(TextInputEditText_id.getText().toString(), TextInputEditText_password.getText().toString());
 
                     if (succeed == 1) {
                         //값 주고 받는 활동
@@ -92,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         startActivity(intent);//다음 activity 진행
                     } else {
-                        loginUser(TextInputEditText_id.getText().toString(), TextInputEditText_password.getText().toString());
+                        //loginUser(TextInputEditText_id.getText().toString(), TextInputEditText_password.getText().toString());
                     }
 
 
@@ -119,22 +120,21 @@ public class LoginActivity extends AppCompatActivity {
         };
     }
 
-    private void createUser(final String id, final String password) {
-        mAuth.createUserWithEmailAndPassword(id, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "회원가입 성공", Toast.LENGTH_SHORT).show();
-                        } else {
-                            //id가 이미 존재할 경우 로그인이 되어짐
-                            loginUser(id, password);
-                        }
-
-                    }
-                });
-    }
-
+//    private void createUser(final String id, final String password) {
+//        mAuth.createUserWithEmailAndPassword(id, password)
+//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        if (task.isSuccessful()) {
+//                            Toast.makeText(getApplicationContext(), "회원가입 성공", Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            //id가 이미 존재할 경우 로그인이 되어짐
+//                            loginUser(id, password);
+//                        }
+//
+//                    }
+//                });
+//    }
 
 
     public void loginUser(String id, String password) {
@@ -146,7 +146,6 @@ public class LoginActivity extends AppCompatActivity {
                         succeed = 0;
                         if (task.isSuccessful()) {
                             // 로그인 성공
-                            Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
                             mAuth.addAuthStateListener(mAuthListener);
                             succeed = 1;
                         } else {
