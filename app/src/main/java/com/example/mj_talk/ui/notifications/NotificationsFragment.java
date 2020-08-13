@@ -1,33 +1,27 @@
 package com.example.mj_talk.ui.notifications;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-import android.widget.LinearLayout;
-import android.widget.Switch;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.Navigation;
 
-import com.ebanx.swipebtn.SwipeButton;
-import com.example.mj_talk.LoginAccount;
-import com.example.mj_talk.LoginActivity;
-import com.example.mj_talk.MainActivity;
+import com.example.mj_talk.ui.Login.LoginActivity;
 import com.example.mj_talk.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class NotificationsFragment extends Fragment {
 
     private NotificationsViewModel notificationsViewModel;
+    private Button btn_logout;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -44,14 +38,20 @@ public class NotificationsFragment extends Fragment {
         });
 
 
-        Button btn=root.findViewById(R.id.password);
-        btn.setOnClickListener(new View.OnClickListener() {
+        Button btn_logout = root.findViewById(R.id.button_logout);
+        btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //  Intent intent = new Intent(NotificationsFragment.this,NotificationsViewModel.class);
-               // Navigation.findNavController(view).navigate(R.id.TextInputEditText_id1);
-        }
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+
+                FirebaseAuth.getInstance().signOut();
+            }
+
         });
+
+        // 이 프레그멘트 가희가 만든거 !?????
+
         return root;
     }
 }

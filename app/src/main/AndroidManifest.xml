@@ -19,9 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".LoginAccount"></activity>
-        <activity android:name=".LoginFind"></activity>
+        <activity android:name=".ui.home.HomeViewPager"></activity>
+        <activity android:name=".ui.Login.LoginActivity"></activity>
+        <activity android:name=".ui.Login.LoginAccount"></activity>
+        <activity android:name=".ui.Login.LoginFind"></activity>
     </application>
 
 </manifest>

@@ -6,6 +6,8 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mj_talk.ui.Login.LoginActivity;
+
 public class LoadingActivity extends AppCompatActivity {
 
     @Override
