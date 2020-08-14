@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -38,10 +39,25 @@ public class LoginAccount extends AppCompatActivity {
     private LoginActivity activity_login;
     int succeed;
 
+    String name;
+    String phonenum;
+    String num;
+    String major;
+    String id;
+    String password;
+    String job = "";
+    String user = "account_id";
+
+    int count = 0;
+
+
     private EditText TextInputEditText_name;
     private EditText TextInputEditText_phonenum;
     private EditText TextInputEditText_num;
     private EditText TextInputEditText_major;
+
+    private CheckBox checkbox_teacher;
+    private CheckBox checkbox_student;
 
 
     private EditText TextInputEditText_account_id;
@@ -50,7 +66,9 @@ public class LoginAccount extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private List<AccountData> accountList;
 
-    private DatabaseReference myRef;
+    static ArrayList<String> arrayData = new ArrayList<String>();
+    static ArrayList<String> arrayIndex = new ArrayList<String>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,38 +86,40 @@ public class LoginAccount extends AppCompatActivity {
         TextInputEditText_phonenum = (EditText) findViewById(R.id.TextInputEditText_phonenum);
         TextInputEditText_num = (EditText) findViewById(R.id.TextInputEditText_num);
         TextInputEditText_major = (EditText) findViewById(R.id.TextInputEditText_major);
+        checkbox_teacher = (CheckBox) findViewById(R.id.checkbox_teacher);
+        checkbox_student = (CheckBox) findViewById(R.id.checkbox_student);
 
-        accountList = new ArrayList<>();
 
         getSupportActionBar().hide(); // 액션바를 감추는 추가적인 코드
+
+        checkbox_teacher.setChecked(false);
+        checkbox_student.setChecked(false);
+
+        getFirebaseDatabase();
 
         Button_complete.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                String name = TextInputEditText_name.getText().toString();
-                String phonenum = TextInputEditText_phonenum.getText().toString();
-                String num = TextInputEditText_num.getText().toString();
-                String major = TextInputEditText_major.getText().toString();
-                String id = TextInputEditText_account_id.getText().toString();
-                String password = TextInputEditText_account_password.getText().toString();
+                name = TextInputEditText_name.getText().toString();
+                phonenum = TextInputEditText_phonenum.getText().toString();
+                num = TextInputEditText_num.getText().toString();
+                major = TextInputEditText_major.getText().toString();
+                id = TextInputEditText_account_id.getText().toString();
+                password = TextInputEditText_account_password.getText().toString();
 
 
                 if (!name.equals("") && !phonenum.equals("") && !num.equals("") && !major.equals("") && !id.equals("") && !password.equals("")) {
 
                     createUser(id, password);
+                    setAccount(count - 1);
+                    postFirebaseDatabase(true);
+                    getFirebaseDatabase();
+                    setInsertMode();
 
-                    AccountData account = new AccountData();
-                    account.setAccount_id(id);
-                    account.setAccount_password(password);
-                    account.setName(name);
-                    account.setPhonenum(phonenum);
-                    account.setNum(num);
-                    account.setMajor(major);
 
                     if (succeed == 1) {
-                        myRef.push().setValue(account);
                         Intent intent = new Intent(LoginAccount.this, LoginActivity.class);//넘어갈 곳 결정
                         startActivity(intent);//다음 activity 진행
                     } else {
@@ -114,72 +134,26 @@ public class LoginAccount extends AppCompatActivity {
             }
         });
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference();
-
-//        myRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                // This method is called once with the initial value and again
-//                // whenever data at this location is updated.
-//                AccountData value = dataSnapshot.getValue(AccountData.class);
-//                //Log.d(TAG, "Value is: " + value);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError error) {
-//                // Failed to read value
-//                //Log.w(TAG, "Failed to read value.", error.toException());
-//            }
-//        });
-
-
-        myRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            //child가 추가될 경우 값이 아래 함수로 들어온다.
-            //그 중 dataSnapshot snapshot에 들어가게 된다.
-            //dataSanpshot = 채팅 데이터를 담고 있는 변수
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                //데이터 베이스에 가서 해당 유형의 정보를 가져오게 된다. 여기서는 class 형태
-                AccountData chat = snapshot.getValue(AccountData.class);
-                //리사이클러뷰의 어댑터에 가져온 채팅 데이터를 셋팅해야 함.
-                //선언된 mAdapter가 그냥 adapter로 선언되어 있기 때문에
-                //리스너 안에서는 타입을 알 수 없기 때문에 mAdapter.add가 나오지 않는다.
-                //형변환을 진행해야 한다.
-                //((ChatAdapter)mAdapter).addChat(chat);
-                Log.d("ChatChat", snapshot.getValue().toString());
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
 
     }
 
+    public void setInsertMode() {
+        TextInputEditText_name.setText("");
+        TextInputEditText_phonenum.setText("");
+        TextInputEditText_num.setText("");
+        TextInputEditText_major.setText("");
+        TextInputEditText_account_id.setText("");
+        TextInputEditText_account_password.setText("");
+        checkbox_teacher.setChecked(false);
+        checkbox_student.setChecked(false);
+    }
 
     public void createUser(final String id, final String password) {
         mAuth.createUserWithEmailAndPassword(id, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        count++;
                         succeed = 0;
                         if (task.isSuccessful()) {
                             succeed = 1;
@@ -195,13 +169,76 @@ public class LoginAccount extends AppCompatActivity {
                 });
     }
 
+    //get position account
+    public void setAccount(int position) {
+        String[] tempData = arrayData.get(position).split("\\s+");
+        Log.e("On Click", "Split Result = " + tempData);
+        TextInputEditText_name.setText(tempData[0].trim());
+        TextInputEditText_phonenum.setText(tempData[1].trim());
+        TextInputEditText_num.setText(tempData[2].trim());
+        TextInputEditText_major.setText(tempData[3].trim());
+        TextInputEditText_account_id.setText(tempData[4].trim());
+        TextInputEditText_account_password.setText(tempData[5].trim());
+        if (tempData[6].trim().equals("교수")) {
+            checkbox_teacher.setChecked(true);
+            job = "teacher";
+        } else {
+            checkbox_student.setChecked(true);
+            job = "student";
+        }
 
-    public void addaccount(AccountData account) {
-        accountList.add(account);
-        //몇 번째에 데이터가 들어갔다는 것을 알려주는 것!!
-        // notifyItemInserted(.size()-1);//데이터가 추가되면 그것에 따른 갱신용이다.
-        //0,1,2 = 데이터의 크기가 3이다.
-        //3번지에 넣어라는 없으므로 -1!
+    }
+
+    public void postFirebaseDatabase(boolean add) {
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        Map<String, Object> childUpdates = new HashMap<>();
+        Map<String, Object> postValues = null;
+        if (add) {
+            AccountData post = new AccountData(name, phonenum, num, major, id, password, job);
+            postValues = post.toMap();
+        }
+        childUpdates.put("/id_list/" + id, postValues);
+        mDatabase.updateChildren(childUpdates);
+    }
+
+    public void getFirebaseDatabase() {
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.e("getFirebaseDatabase", "key: " + dataSnapshot.getChildrenCount());
+                arrayData.clear();
+                arrayIndex.clear();
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    String key = postSnapshot.getKey();
+                    AccountData get = postSnapshot.getValue(AccountData.class);
+                    String[] info = {get.name, get.phonenum, get.num, get.major, get.account_id, get.account_password, get.job};
+                    // String Result = info[0].toString() + info[1].toString()+ info[2].toString()+ info[3].toString()+ info[4].toString()+ info[5].toString()+ info[5].toString();
+                    String Result = setTextLength(info[0], 10) + setTextLength(info[1], 10) + setTextLength(info[2], 10) + setTextLength(info[3], 10);
+                    arrayData.add(Result);
+                    arrayIndex.add(key);
+                    //Log.d("getFirebaseDatabase", "key: " + key);
+                    //Log.d("getFirebaseDatabase", "info: " + info[0] + info[1] + info[2] + info[3]);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("getFirebaseDatabase", "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+        Query sortbyAge = FirebaseDatabase.getInstance().getReference().child("id_list").orderByChild(user);
+        sortbyAge.addListenerForSingleValueEvent(postListener);
+    }
+
+    public String setTextLength(String text, int length) {
+        if (text.length() < length) {
+            int gap = length - text.length();
+            for (int i = 0; i < gap; i++) {
+                text = text + " ";
+            }
+        }
+        return text;
     }
 
 }

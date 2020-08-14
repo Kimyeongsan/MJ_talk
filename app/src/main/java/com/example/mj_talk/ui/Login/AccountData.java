@@ -1,5 +1,6 @@
 package com.example.mj_talk.ui.Login;
 
+import android.accounts.Account;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,17 @@ public class AccountData {
     public String major;
     public String account_id;
     public String account_password;
+    public String job;
+
+    public AccountData(String name, String phonenum, String num, String major, String id, String password, String job) {
+        setName(name);
+        setPhonenum(phonenum);
+        setNum(num);
+        setMajor(major);
+        setAccount_id(id);
+        setAccount_password(password);
+        setJob(job);
+    }
 
 
     public String getName() {
@@ -67,6 +79,14 @@ public class AccountData {
 
     public void setAccount_password(String account_password) {
         this.account_password = account_password;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
     }
 
     public Map<String, Object> toMap() {

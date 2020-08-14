@@ -45,41 +45,43 @@ public class NotificationsFragment extends Fragment {
         });
 
 
+        swbtn1 = root.findViewById(R.id.swbtn1);
+        swbtn2 = root.findViewById(R.id.swbtn2);
+        swbtn3 = root.findViewById(R.id.swbtn3);
+        swbtn4 = root.findViewById(R.id.swbtn4);
 
-        Button swbtn1 = root.findViewById(R.id.swbtn1);
-        Button swbtn2 = root.findViewById(R.id.swbtn2);
-        Button swbtn3 = root.findViewById(R.id.swbtn3);
-        Button swbtn4 = root.findViewById(R.id.swbtn4);
-
-     //  Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
-    //이부분이 오류 떠서... 코멘트 처리했어요ㅜㅜ
+        // Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+        //이부분이 오류 떠서... 코멘트 처리했어요ㅜㅜ
         swbtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-       //          Vibrator.vibrate(VibrationEffect.createOneShot(1000,50);
-        }
+                //          Vibrator.vibrate(VibrationEffect.createOneShot(1000,50);
+            }
         });
+
         swbtn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-        //        Vibrator.vibrate(VibrationEffect.createOneShot(1000,60);
+                //        Vibrator.vibrate(VibrationEffect.createOneShot(1000,60);
             }
         });
+
         swbtn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-        //        Vibrator.vibrate(VibrationEffect.createOneShot(1000,70);
+                //        Vibrator.vibrate(VibrationEffect.createOneShot(1000,70);
             }
         });
+
         swbtn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-        //        Vibrator.vibrate(VibrationEffect.createOneShot(1000,80);
+                //        Vibrator.vibrate(VibrationEffect.createOneShot(1000,80);
             }
         });
 
 
-        Button btn_logout = root.findViewById(R.id.button_logout);
+        btn_logout = root.findViewById(R.id.button_logout);
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
