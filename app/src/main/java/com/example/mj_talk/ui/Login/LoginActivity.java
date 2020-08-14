@@ -120,21 +120,6 @@ public class LoginActivity extends AppCompatActivity {
         };
     }
 
-//    private void createUser(final String id, final String password) {
-//        mAuth.createUserWithEmailAndPassword(id, password)
-//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if (task.isSuccessful()) {
-//                            Toast.makeText(getApplicationContext(), "회원가입 성공", Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            //id가 이미 존재할 경우 로그인이 되어짐
-//                            loginUser(id, password);
-//                        }
-//
-//                    }
-//                });
-//    }
 
 
     public void loginUser(String id, String password) {
