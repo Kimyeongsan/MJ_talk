@@ -1,50 +1,34 @@
 {
   "project_info": {
-    "project_number": "123001350910",
-    "firebase_url": "https://practice-123-51d77.firebaseio.com",
-    "project_id": "practice-123-51d77",
-    "storage_bucket": "practice-123-51d77.appspot.com"
+    "project_number": "333745778293",
+    "firebase_url": "https://mj-project-b8b4d.firebaseio.com",
+    "project_id": "mj-project-b8b4d",
+    "storage_bucket": "mj-project-b8b4d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:123001350910:android:f2c5f43c36993a76aa13af",
+        "mobilesdk_app_id": "1:333745778293:android:0ecec5b4efd89894cd523c",
         "android_client_info": {
           "package_name": "com.example.mj_talk"
         }
       },
       "oauth_client": [
         {
-          "client_id": "123001350910-5utcq0oijsatobn1jlp4q5cn6n2mk0tg.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.mj_talk",
-            "certificate_hash": "cc86a8e0f615cd7956be6881d5a89780a522e52d"
-          }
-        },
-        {
-          "client_id": "123001350910-d2brtklkg2tcphiqof64n6bpu5aidjqe.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.mj_talk",
-            "certificate_hash": "1bd2b445dd0cb8bd90d846fafa5b40ad9d61808b"
-          }
-        },
-        {
-          "client_id": "123001350910-2m16jvfl8mjmmutbduhspofbsfubtobs.apps.googleusercontent.com",
+          "client_id": "333745778293-7uhfqqo53r1ajeeco08hpk9t2fli267u.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAEbxGnYRSqPfbXHevsgSUM0S3bnwLyfUo"
+          "current_key": "AIzaSyCcsNb1OoKOn1Qlmsng-u9fvQ7LhuEBxKY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "123001350910-2m16jvfl8mjmmutbduhspofbsfubtobs.apps.googleusercontent.com",
+              "client_id": "333745778293-7uhfqqo53r1ajeeco08hpk9t2fli267u.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

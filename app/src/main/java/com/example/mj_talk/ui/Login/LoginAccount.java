@@ -18,6 +18,7 @@ import com.example.mj_talk.MainActivity;
 import com.example.mj_talk.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -36,6 +37,7 @@ import java.util.Map;
 public class LoginAccount extends AppCompatActivity {
     private Button Button_complete;
     private FirebaseAuth mAuth;
+    private FirebaseAnalytics mFirebaseAnalytics;
     private LoginActivity activity_login;
     int succeed;
 
@@ -64,14 +66,17 @@ public class LoginAccount extends AppCompatActivity {
     private EditText TextInputEditText_account_password;
 
     private DatabaseReference mDatabase;
-    private List<AccountData> accountList;
 
-    static ArrayList<String> arrayData = new ArrayList<String>();
-    static ArrayList<String> arrayIndex = new ArrayList<String>();
 
+    DatabaseReference myref = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference ref = myref.child("text");
+
+    Map<String, Object> map = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         mAuth = FirebaseAuth.getInstance();
 
         super.onCreate(savedInstanceState);
@@ -80,8 +85,6 @@ public class LoginAccount extends AppCompatActivity {
         Button_complete = findViewById(R.id.Button_complete);
         TextInputEditText_account_id = (EditText) findViewById(R.id.TextInputEditText_account_id);
         TextInputEditText_account_password = (EditText) findViewById(R.id.TextInputEditText_account_password);
-
-
         TextInputEditText_name = (EditText) findViewById(R.id.TextInputEditText_name);
         TextInputEditText_phonenum = (EditText) findViewById(R.id.TextInputEditText_phonenum);
         TextInputEditText_num = (EditText) findViewById(R.id.TextInputEditText_num);
@@ -95,13 +98,12 @@ public class LoginAccount extends AppCompatActivity {
         checkbox_teacher.setChecked(false);
         checkbox_student.setChecked(false);
 
-        getFirebaseDatabase();
+        // getFirebaseDatabase();
 
         Button_complete.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-
                 name = TextInputEditText_name.getText().toString();
                 phonenum = TextInputEditText_phonenum.getText().toString();
                 num = TextInputEditText_num.getText().toString();
@@ -109,14 +111,19 @@ public class LoginAccount extends AppCompatActivity {
                 id = TextInputEditText_account_id.getText().toString();
                 password = TextInputEditText_account_password.getText().toString();
 
-
                 if (!name.equals("") && !phonenum.equals("") && !num.equals("") && !major.equals("") && !id.equals("") && !password.equals("")) {
 
+                    setAccount(count);
+                    map.put("count", count);
+                    map.put("name", name);
+                    map.put("phonenum", phonenum);
+                    map.put("num", num);
+                    map.put("major", major);
+                    map.put("id", id);
+                    map.put("password", password);
+                    map.put("job", job);
+                    myref.push().setValue(map);
                     createUser(id, password);
-                    setAccount(count - 1);
-                    postFirebaseDatabase(true);
-                    getFirebaseDatabase();
-                    setInsertMode();
 
 
                     if (succeed == 1) {
@@ -127,33 +134,38 @@ public class LoginAccount extends AppCompatActivity {
                     }
 
                 } else {
-                    //loginUser(TextInputEditText_id.getText().toString(), TextInputEditText_password.getText().toString());
-                    //Toast.makeText(LoginAccount.this, "이메일과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show();
+
                     Toast.makeText(LoginAccount.this, "정보를 모두 입력해주세요.", Toast.LENGTH_LONG).show();
                 }
             }
         });
 
 
+        myref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    AccountData account = snapshot.getValue(AccountData.class);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+
+
     }
 
-    public void setInsertMode() {
-        TextInputEditText_name.setText("");
-        TextInputEditText_phonenum.setText("");
-        TextInputEditText_num.setText("");
-        TextInputEditText_major.setText("");
-        TextInputEditText_account_id.setText("");
-        TextInputEditText_account_password.setText("");
-        checkbox_teacher.setChecked(false);
-        checkbox_student.setChecked(false);
-    }
 
     public void createUser(final String id, final String password) {
         mAuth.createUserWithEmailAndPassword(id, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        count++;
+                        ++count;
                         succeed = 0;
                         if (task.isSuccessful()) {
                             succeed = 1;
@@ -169,76 +181,17 @@ public class LoginAccount extends AppCompatActivity {
                 });
     }
 
-    //get position account
     public void setAccount(int position) {
-        String[] tempData = arrayData.get(position).split("\\s+");
-        Log.e("On Click", "Split Result = " + tempData);
-        TextInputEditText_name.setText(tempData[0].trim());
-        TextInputEditText_phonenum.setText(tempData[1].trim());
-        TextInputEditText_num.setText(tempData[2].trim());
-        TextInputEditText_major.setText(tempData[3].trim());
-        TextInputEditText_account_id.setText(tempData[4].trim());
-        TextInputEditText_account_password.setText(tempData[5].trim());
-        if (tempData[6].trim().equals("교수")) {
-            checkbox_teacher.setChecked(true);
+
+        if (checkbox_teacher.isChecked()) {
             job = "teacher";
+            Log.d("jobteacher", job);
         } else {
-            checkbox_student.setChecked(true);
             job = "student";
+            Log.d("jobstudent", job);
         }
 
     }
 
-    public void postFirebaseDatabase(boolean add) {
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        Map<String, Object> childUpdates = new HashMap<>();
-        Map<String, Object> postValues = null;
-        if (add) {
-            AccountData post = new AccountData(name, phonenum, num, major, id, password, job);
-            postValues = post.toMap();
-        }
-        childUpdates.put("/id_list/" + id, postValues);
-        mDatabase.updateChildren(childUpdates);
-    }
-
-    public void getFirebaseDatabase() {
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.e("getFirebaseDatabase", "key: " + dataSnapshot.getChildrenCount());
-                arrayData.clear();
-                arrayIndex.clear();
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    String key = postSnapshot.getKey();
-                    AccountData get = postSnapshot.getValue(AccountData.class);
-                    String[] info = {get.name, get.phonenum, get.num, get.major, get.account_id, get.account_password, get.job};
-                    // String Result = info[0].toString() + info[1].toString()+ info[2].toString()+ info[3].toString()+ info[4].toString()+ info[5].toString()+ info[5].toString();
-                    String Result = setTextLength(info[0], 10) + setTextLength(info[1], 10) + setTextLength(info[2], 10) + setTextLength(info[3], 10);
-                    arrayData.add(Result);
-                    arrayIndex.add(key);
-                    //Log.d("getFirebaseDatabase", "key: " + key);
-                    //Log.d("getFirebaseDatabase", "info: " + info[0] + info[1] + info[2] + info[3]);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w("getFirebaseDatabase", "loadPost:onCancelled", databaseError.toException());
-            }
-        };
-        Query sortbyAge = FirebaseDatabase.getInstance().getReference().child("id_list").orderByChild(user);
-        sortbyAge.addListenerForSingleValueEvent(postListener);
-    }
-
-    public String setTextLength(String text, int length) {
-        if (text.length() < length) {
-            int gap = length - text.length();
-            for (int i = 0; i < gap; i++) {
-                text = text + " ";
-            }
-        }
-        return text;
-    }
 
 }

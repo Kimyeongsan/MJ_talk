@@ -88,14 +88,14 @@ public class AccountData {
     public void setJob(String job) {
         this.job = job;
     }
-
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("name", name);
-        result.put("phonenum", phonenum);
-        result.put("num", num);
-        result.put("major", major);
-        return result;
-    }
+//
+//    public Map<String, Object> toMap() {
+//        HashMap<String, Object> result = new HashMap<>();
+//        result.put("name", name);
+//        result.put("phonenum", phonenum);
+//        result.put("num", num);
+//        result.put("major", major);
+//        return result;
+//    }
 
 }
