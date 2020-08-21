@@ -25,6 +25,8 @@
         <activity android:name=".ui.Login.LoginActivity"></activity>
         <activity android:name=".ui.Login.LoginAccount"></activity>
         <activity android:name=".ui.Login.LoginFind"></activity>
+        <activity android:name=".ui.Login.FindId"></activity>
+        <activity android:name=".ui.Login.FindPassword"></activity>
     </application>
 
 </manifest>

@@ -21,15 +21,17 @@ public class AccountData {
     public String account_password;
     public String job;
 
-    public AccountData(String name, String phonenum, String num, String major, String id, String password, String job) {
-        setName(name);
-        setPhonenum(phonenum);
-        setNum(num);
-        setMajor(major);
-        setAccount_id(id);
-        setAccount_password(password);
-        setJob(job);
-    }
+
+//    public AccountData(String name, String phonenum, String num, String major, String id, String password, String job) {
+//        count = 0;
+//        setName(name);
+//        setPhonenum(phonenum);
+//        setNum(num);
+//        setMajor(major);
+//        setAccount_id(id);
+//        setAccount_password(password);
+//        setJob(job);
+//    }
 
 
     public String getName() {
@@ -88,14 +90,5 @@ public class AccountData {
     public void setJob(String job) {
         this.job = job;
     }
-//
-//    public Map<String, Object> toMap() {
-//        HashMap<String, Object> result = new HashMap<>();
-//        result.put("name", name);
-//        result.put("phonenum", phonenum);
-//        result.put("num", num);
-//        result.put("major", major);
-//        return result;
-//    }
 
 }

@@ -39,8 +39,9 @@ public class LoginAccount extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAnalytics mFirebaseAnalytics;
     private LoginActivity activity_login;
-    int succeed;
 
+    String ID = "";
+    char target = '@';
     String name;
     String phonenum;
     String num;
@@ -49,9 +50,6 @@ public class LoginAccount extends AppCompatActivity {
     String password;
     String job = "";
     String user = "account_id";
-
-    int count = 0;
-
 
     private EditText TextInputEditText_name;
     private EditText TextInputEditText_phonenum;
@@ -72,6 +70,7 @@ public class LoginAccount extends AppCompatActivity {
     DatabaseReference ref = myref.child("text");
 
     Map<String, Object> map = new HashMap<>();
+    Map<String, Object> childUpdate = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +97,6 @@ public class LoginAccount extends AppCompatActivity {
         checkbox_teacher.setChecked(false);
         checkbox_student.setChecked(false);
 
-        // getFirebaseDatabase();
 
         Button_complete.setOnClickListener(new View.OnClickListener() {
 
@@ -111,27 +109,21 @@ public class LoginAccount extends AppCompatActivity {
                 id = TextInputEditText_account_id.getText().toString();
                 password = TextInputEditText_account_password.getText().toString();
 
+
                 if (!name.equals("") && !phonenum.equals("") && !num.equals("") && !major.equals("") && !id.equals("") && !password.equals("")) {
 
-                    setAccount(count);
-                    map.put("count", count);
-                    map.put("name", name);
-                    map.put("phonenum", phonenum);
-                    map.put("num", num);
-                    map.put("major", major);
-                    map.put("id", id);
-                    map.put("password", password);
-                    map.put("job", job);
-                    myref.push().setValue(map);
+                    int target_num = id.indexOf(target);
+                    ID = id.substring(0, target_num);
+
                     createUser(id, password);
 
 
-                    if (succeed == 1) {
-                        Intent intent = new Intent(LoginAccount.this, LoginActivity.class);//넘어갈 곳 결정
-                        startActivity(intent);//다음 activity 진행
-                    } else {
-
-                    }
+//                    if (succeed == 1) {
+//                        Intent intent = new Intent(LoginAccount.this, LoginActivity.class);//넘어갈 곳 결정
+//                        startActivity(intent);//다음 activity 진행
+//                    } else {
+//
+//                    }
 
                 } else {
 
@@ -140,21 +132,8 @@ public class LoginAccount extends AppCompatActivity {
             }
         });
 
-
-        myref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    AccountData account = snapshot.getValue(AccountData.class);
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
+//
+//
 
 
     }
@@ -165,13 +144,19 @@ public class LoginAccount extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        ++count;
-                        succeed = 0;
                         if (task.isSuccessful()) {
-                            succeed = 1;
+                            setJob();
+                            map.put("name", name);
+                            map.put("phonenum", phonenum);
+                            map.put("num", num);
+                            map.put("major", major);
+                            map.put("id", id);
+                            map.put("password", password);
+                            map.put("job", job);
+                            childUpdate.put("/account_list/" + ID, map);
+                            myref.updateChildren(childUpdate);
                             Toast.makeText(LoginAccount.this, "회원가입 성공!", Toast.LENGTH_LONG).show();
                         } else {
-                            succeed = 2;
                             //id가 이미 존재할 경우 로그인이 되어짐
                             //activity_login.loginUser(id, password);
                             Toast.makeText(LoginAccount.this, "이미 존재하는 회원입니다.", Toast.LENGTH_SHORT).show();
@@ -181,7 +166,7 @@ public class LoginAccount extends AppCompatActivity {
                 });
     }
 
-    public void setAccount(int position) {
+    public void setJob() {
 
         if (checkbox_teacher.isChecked()) {
             job = "teacher";

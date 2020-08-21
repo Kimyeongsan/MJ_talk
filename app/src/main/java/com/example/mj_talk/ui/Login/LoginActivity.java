@@ -26,7 +26,6 @@ public class LoginActivity extends AppCompatActivity {
     private TextView Text_account;
     private TextView Text_forget;
     private FirebaseAuth mAuth;
-    int succeed;
 
 
     private EditText TextInputEditText_id;
@@ -86,15 +85,15 @@ public class LoginActivity extends AppCompatActivity {
                 if (!TextInputEditText_id.getText().toString().equals("") && !TextInputEditText_password.getText().toString().equals("")) {
                     loginUser(TextInputEditText_id.getText().toString(), TextInputEditText_password.getText().toString());
                     //login_account.createUser(TextInputEditText_id.getText().toString(), TextInputEditText_password.getText().toString());
-
-                    if (succeed == 1) {
-                        //값 주고 받는 활동
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);//넘어갈 곳 결정
-
-                        startActivity(intent);//다음 activity 진행
-                    } else {
-                        //loginUser(TextInputEditText_id.getText().toString(), TextInputEditText_password.getText().toString());
-                    }
+//
+//                    if (succeed == 1) {
+//                        //값 주고 받는 활동
+//                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);//넘어갈 곳 결정
+//
+//                        startActivity(intent);//다음 activity 진행
+//                    } else {
+//                        //loginUser(TextInputEditText_id.getText().toString(), TextInputEditText_password.getText().toString());
+//                    }
 
 
                 } else {
@@ -128,15 +127,15 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
 
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        succeed = 0;
+//                        succeed = 0;
                         if (task.isSuccessful()) {
                             // 로그인 성공
                             mAuth.addAuthStateListener(mAuthListener);
-                            succeed = 1;
+//                            succeed = 1;
                         } else {
                             // 로그인 실패
                             Toast.makeText(LoginActivity.this, "아이디나 비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
-                            succeed = 2;
+//                            succeed = 2;
                         }
                     }
                 });
